@@ -19,6 +19,12 @@
     Copy usrspc files manually or use mtools for Windows.
 #>
 
+
+param(
+    [switch]$CleanBuild,
+    [switch]$SkipUserspace
+)
+
 $ErrorActionPreference = "Stop"
 
 $ROOT = Split-Path -Parent $MyInvocation.MyCommand.Definition
@@ -257,11 +263,6 @@ function Build-Userspace {
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
-param(
-    [switch]$CleanBuild,
-    [switch]$SkipUserspace
-)
-
 if ($CleanBuild) { Clean }
 
 Build-Bootloader
