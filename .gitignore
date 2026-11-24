@@ -1,0 +1,15 @@
+# Build artifacts
+bin/
+build/
+
+# Userspace build artifacts
+usrspc/lib/build/
+usrspc/gshell/build/
+usrspc/lib/lib.o
+usrspc/gshell/main.o
+
+# OS image
+*.bin
+
+# IDE
+.vscode/

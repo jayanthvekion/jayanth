@@ -12,7 +12,7 @@ NovaOS is a lightweight multithreaded kernel built for x86 (32-bit) computers.
 - PS-2 Keyboard Support
 - FAT16 Filesystem Support
 - nLoader — ELF Loader built exclusively for NovaOS
-- nShell — a super lightweight shell
+- nShell — a super lightweight shell with `hello` built-in command
 
 ## Dependencies
 
@@ -34,30 +34,74 @@ Refer to [GCC Cross-Compiler](https://wiki.osdev.org/GCC_Cross-Compiler) if you 
 
 > Only QEMU is required to run NovaOS. The rest are needed for building the kernel.
 
-## Getting Started
+## Windows Build Instructions
 
-Build the OS image:
+### Prerequisites
 
+Install the following tools on Windows:
+
+```powershell
+winget install nasm
+winget install qemu
+winget install make
 ```
-bash
-make
+
+You also need the **i686-elf cross-compiler** (gcc + ld). This is not available via winget — follow the [OSDev GCC Cross-Compiler guide](https://wiki.osdev.org/GCC_Cross-Compiler) to build it for Windows.
+
+### Build
+
+Open PowerShell in the project directory:
+
+```powershell
+cd C:\path\to\gammaOS-main\gammaOS-main
 ```
 
-Run NovaOS in QEMU:
+Build NovaOS:
 
+```powershell
+.\build.ps1
 ```
-bash
-qemu-system-i386 -hda nova.bin
+
+For a clean build:
+
+```powershell
+.\build.ps1 -CleanBuild
+```
+
+To skip userspace components:
+
+```powershell
+.\build.ps1 -SkipUserspace
+```
+
+### Run
+
+Launch NovaOS in QEMU:
+
+```powershell
+.\run.ps1
+```
+
+Or with custom memory:
+
+```powershell
+.\run.ps1 -Memory 64
+```
+
+Or directly:
+
+```powershell
+qemu-system-i386 -hda bin\os.bin
 ```
 
 This will boot up the kernel and drop you into the nShell prompt:
 
 ```
-
+NovaOS v1.0.0
 nova> _
 ```
 
-Type hello to see the built-in welcome message, or run other executables from the shell.
+Type `hello` to see the built-in welcome message, or run other executables from the shell.
 
 ## License
 
